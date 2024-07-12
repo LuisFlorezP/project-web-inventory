@@ -1,0 +1,303 @@
+{
+  "openapi": "3.0.1",
+  "info":
+    {
+      "title": "Inventory",
+      "description": "Backend to project inventory.",
+      "termsOfService": "http://swagger.io/terms/",
+      "license": { "name": "Apache 2.0", "url": "http://springdoc.org" },
+      "version": "1.0.0",
+    },
+  "servers":
+    [
+      {
+        "url": "http://localhost:8082/inventory",
+        "description": "Generated server url",
+      },
+    ],
+  "tags":
+    [
+      {
+        "name": "Category Controller",
+        "description": "Controller to the Category entity",
+      },
+    ],
+  "paths":
+    {
+      "/categories/{id}":
+        {
+          "get":
+            {
+              "tags": ["Category Controller"],
+              "summary": "Get-Category-By-Id",
+              "description": "Allows you to see category",
+              "operationId": "getCategoryById",
+              "parameters":
+                [
+                  {
+                    "name": "rqUuid",
+                    "in": "header",
+                    "required": true,
+                    "schema": { "type": "string" },
+                  },
+                  {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": { "type": "integer", "format": "int64" },
+                  },
+                ],
+              "responses":
+                {
+                  "200":
+                    {
+                      "description": "OK",
+                      "content":
+                        {
+                          "*/*":
+                            {
+                              "schema":
+                                {
+                                  "$ref": "#/components/schemas/SingleCategoryRs",
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+          "put":
+            {
+              "tags": ["Category Controller"],
+              "summary": "Update-Category",
+              "description": "Allows you to update category",
+              "operationId": "updateCategory",
+              "parameters":
+                [
+                  {
+                    "name": "rqUuid",
+                    "in": "header",
+                    "required": true,
+                    "schema": { "type": "string" },
+                  },
+                  {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": { "type": "integer", "format": "int64" },
+                  },
+                ],
+              "requestBody":
+                {
+                  "content":
+                    {
+                      "application/json":
+                        {
+                          "schema":
+                            { "$ref": "#/components/schemas/CategoryRq" },
+                        },
+                    },
+                  "required": true,
+                },
+              "responses":
+                {
+                  "200":
+                    {
+                      "description": "OK",
+                      "content":
+                        {
+                          "*/*":
+                            {
+                              "schema":
+                                {
+                                  "$ref": "#/components/schemas/SingleCategoryRs",
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+          "delete":
+            {
+              "tags": ["Category Controller"],
+              "summary": "Delete-Category",
+              "description": "Allows you to delete category",
+              "operationId": "deleteCategory",
+              "parameters":
+                [
+                  {
+                    "name": "rqUuid",
+                    "in": "header",
+                    "required": true,
+                    "schema": { "type": "string" },
+                  },
+                  {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": { "type": "integer", "format": "int64" },
+                  },
+                ],
+              "responses":
+                {
+                  "200":
+                    {
+                      "description": "OK",
+                      "content":
+                        {
+                          "*/*":
+                            {
+                              "schema":
+                                { "$ref": "#/components/schemas/NoContentRs" },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+      "/categories":
+        {
+          "get":
+            {
+              "tags": ["Category Controller"],
+              "summary": "Get-Categories",
+              "description": "Allows you to see all categories",
+              "operationId": "getCategories",
+              "parameters":
+                [
+                  {
+                    "name": "rqUuid",
+                    "in": "header",
+                    "required": true,
+                    "schema": { "type": "string" },
+                  },
+                ],
+              "responses":
+                {
+                  "200":
+                    {
+                      "description": "OK",
+                      "content":
+                        {
+                          "*/*":
+                            {
+                              "schema":
+                                {
+                                  "$ref": "#/components/schemas/ListCategoryRs",
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+          "post":
+            {
+              "tags": ["Category Controller"],
+              "summary": "Save-Category",
+              "description": "Allows you to create new category",
+              "operationId": "saveCategory",
+              "parameters":
+                [
+                  {
+                    "name": "rqUuid",
+                    "in": "header",
+                    "required": true,
+                    "schema": { "type": "string" },
+                  },
+                ],
+              "requestBody":
+                {
+                  "content":
+                    {
+                      "application/json":
+                        {
+                          "schema":
+                            { "$ref": "#/components/schemas/CategoryRq" },
+                        },
+                    },
+                  "required": true,
+                },
+              "responses":
+                {
+                  "200":
+                    {
+                      "description": "OK",
+                      "content":
+                        {
+                          "*/*":
+                            {
+                              "schema":
+                                {
+                                  "$ref": "#/components/schemas/SingleCategoryRs",
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    },
+  "components":
+    {
+      "schemas":
+        {
+          "CategoryRq":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "name": { "type": "string" },
+                  "description": { "type": "string" },
+                },
+            },
+          "BaseRs":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "rqUuid": { "type": "string" },
+                  "code": { "type": "integer", "format": "int32" },
+                  "reasonPhrase": { "type": "string" },
+                  "detail": { "type": "string" },
+                },
+            },
+          "CategoryRs":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "id": { "type": "integer", "format": "int64" },
+                  "name": { "type": "string" },
+                  "description": { "type": "string" },
+                },
+            },
+          "SingleCategoryRs":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "status": { "$ref": "#/components/schemas/BaseRs" },
+                  "category": { "$ref": "#/components/schemas/CategoryRs" },
+                },
+            },
+          "ListCategoryRs":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "status": { "$ref": "#/components/schemas/BaseRs" },
+                  "categories":
+                    {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/CategoryRs" },
+                    },
+                },
+            },
+          "NoContentRs":
+            {
+              "type": "object",
+              "properties":
+                { "status": { "$ref": "#/components/schemas/BaseRs" } },
+            },
+        },
+    },
+}
